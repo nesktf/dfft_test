@@ -18,7 +18,8 @@ local function sample_signal(signal, max, min, n_samples, use_cmplx)
   local dt = (max-min)/n_samples
   local samples = {}
   for i = min, n_samples-1, 1 do
-    table.insert(samples, cmplx(signal(i*dt)))
+    local t = min + i*dt
+    table.insert(samples, cmplx(signal(t)))
   end
   return samples
 end
@@ -151,7 +152,7 @@ end
 do
   local max = 2*math.pi
   local min = 0
-  local n_samples = 32
+  local n_samples = 16
   print(string.format("Samples for sin(t) in [%.2f, %.2f) (%d samples)", min, max, n_samples))
   local samples = sample_signal(math.sin, max, min, n_samples)
   print_samples(samples)
@@ -168,7 +169,7 @@ do
 
   print("\nFast DFT inplace a")
   local fast_dft_inplace_a = copy_array(samples)
-  dft_fast_ct_inplace(fast_dft_inplace_a)
+  dft_fast_ct_inplace(fast_dft_inplace_a, false)
   print_samples(fast_dft_inplace_a)
 
   print("\nFast DFT inplace b")

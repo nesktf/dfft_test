@@ -153,7 +153,7 @@ do
   local min = 0
   local n_samples = 32
   print(string.format("Samples for sin(t) in [%.2f, %.2f) (%d samples)", min, max, n_samples))
-  local samples = sample_signal(math.sin, 2*math.pi, 0, 32)
+  local samples = sample_signal(math.sin, max, min, n_samples)
   print_samples(samples)
 
   print("\nNaive DFT")
@@ -166,8 +166,13 @@ do
   dft_fast_ct(fast_dft_recursive)
   print_samples(fast_dft_recursive)
 
-  print("\nFast DFT inplace")
-  local fast_dft_inplace = copy_array(samples)
-  dft_fast_ct_inplace(fast_dft_inplace)
-  print_samples(fast_dft_inplace)
+  print("\nFast DFT inplace a")
+  local fast_dft_inplace_a = copy_array(samples)
+  dft_fast_ct_inplace(fast_dft_inplace_a)
+  print_samples(fast_dft_inplace_a)
+
+  print("\nFast DFT inplace b")
+  local fast_dft_inplace_b = copy_array(samples)
+  dft_fast_ct_inplace(fast_dft_inplace_b, true)
+  print_samples(fast_dft_inplace_b)
 end

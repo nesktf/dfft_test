@@ -1,4 +1,3 @@
-// g++ fft.cpp -lfmt -std=c++20 -o fft && ./fft
 #include <fmt/core.h>
 
 #include <complex>
